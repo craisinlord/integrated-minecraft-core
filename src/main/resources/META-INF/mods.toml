@@ -1,0 +1,53 @@
+modLoader="javafml" #mandatory
+loaderVersion="[38,)" #mandatory
+license="All rights reserved"
+
+[[mods]] #mandatory
+modId="integrated_minecraft" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Integrated Minecraft Modpack" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/integrated-minecraft"
+authors="CraisinLord"
+credits="Special thanks to TelpathicGrunt for thier structure tutorial and help with coding! And Bdubs, GoodTimesWithScar and Mythical Sausage for building inspirations!"
+description='''
+Resources for the Intgrated Minecraft Modpack
+'''
+
+[[dependencies.integrated_minecraft]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+
+[[dependencies.integrated_minecraft]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.0.0,)"
+
+[[dependencies.integrated_minecraft]]
+    modId="quark"
+    mandatory=true
+    versionRange="*"
+
+[[dependencies.integrated_minecraft]]
+    modId="create"
+    mandatory=true
+    versionRange="*"
+
+[[dependencies.integrated_minecraft]]
+    modId="supplementaries"
+    mandatory=true
+    versionRange="*"
+
+[[dependencies.integrated_minecraft]]
+    modId="integrated_api"
+    mandatory=true
+    versionRange="[1.3.4,)"
+
+[[dependencies.integrated_minecraft]]
+    modId="irons_spellbooks"
+    ordering="AFTER"
+    mandatory=true
+    versionRange="*"
+
+
+

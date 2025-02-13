@@ -1,0 +1,131 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id "net.darkhax.curseforgegradle" version "1.0.7"
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+version = "${mod_version}+${mc_version}"
+group = "com.craisinlord"
+archivesBaseName = "${modid}_forge"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: "official", version: "${mc_version}"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+   
+    runs {
+        client {
+            workingDirectory project.file('run')
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { integrated_minecraft { source sourceSets.main } }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { integrated_minecraft { source sourceSets.main } }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            args '--mod', project.getProperty('modid'), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { integrated_minecraft { source sourceSets.main } }
+        }
+    }
+}
+
+repositories {
+    maven { url "https://nexus.resourcefulbees.com/repository/telepathicgrunt/" }
+    maven { url "https://www.cursemaven.com" }
+    maven { url "https://api.modrinth.com/maven/" }
+    maven {
+        url "https://maven.architectury.dev/"
+    }
+    maven {
+        url "https://maven.shedaniel.me"
+    }
+    maven {
+        // for AutoRegLib
+        name "blamejared"
+        url "https://maven.blamejared.com/"
+    }
+    maven {
+        // for JEI
+        name "progwml6"
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url "https://maven.jaackson.me"
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
+//    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:${project.commandstructures_forge}")
+//    runtimeOnly fg.deobf("com.telepathicgrunt:StructureVoidToggle-Forge:${project.structurevoidtoggle_forge}")
+
+    runtimeOnly fg.deobf("curse.maven:jei-${jei_curseforge_id}:${jei_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:theoneprobe-${top_curseforge_id}:${top_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:worldedit-${worldedit_curseforge_id}:${worldedit_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:alexsmobs-${alexsmobs_curseforge_id}:${alexsmobs_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:citadel-${citadel_curseforge_id}:${citadel_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:rs-${rs_curseforge_id}:${rs_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:biomesoplenty-${bop_curseforge_id}:${bop_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:tb-${tb_curseforge_id}:${tb_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:quark-${quark_curseforge_id}:${quark_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:zeta-${zeta_curseforge_id}:${zeta_curseforge_file_id}")
+
+    runtimeOnly fg.deobf("curse.maven:sup-${sup_curseforge_id}:${sup_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:midnight-${midnight_curseforge_id}:${midnight_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:waystones-${waystones_curseforge_id}:${waystones_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:balm-${balm_curseforge_id}:${balm_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:if-${if_curseforge_id}:${if_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:curious-${curious_curseforge_id}:${curious_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:gravestone-${gravestone_curseforge_id}:${gravestone_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:inventorio-${inventorio_curseforge_id}:${inventorio_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:betterend-${betterend_curseforge_id}:${betterend_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:galosphere-${galosphere_curseforge_id}:${galosphere_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:aqua-${aqua_curseforge_id}:${aqua_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:iss-${iss_curseforge_id}:${iss_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:bomd-${bomd_curseforge_id}:${bomd_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:cc-${cc_curseforge_id}:${cc_curseforge_file_id}")
+    runtimeOnly fg.deobf("curse.maven:citadel-${citadel_curseforge_id}:${citadel_curseforge_file_id}")
+
+    implementation fg.deobf("curse.maven:alexscaves-${alexscaves_curseforge_id}:${alexscaves_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:intapi-${intapi_curseforge_id}:${intapi_curseforge_file_id}")
+    implementation fg.deobf("curse.maven:patchouli-${patchouli_curseforge_id}:${patchouli_curseforge_file_id}")
+
+
+
+
+
+    runtimeOnly fg.deobf("curse.maven:create-${create_curseforge_id}:${create_curseforge_file_id}")
+//    runtimeOnly fg.deobf("curse.maven:byg-${byg_curseforge_id}:${byg_curseforge_file_id}")
+}
+
+
+mixin {
+    add sourceSets.main, "${modid}.refmap.json"
+}
+
+apply from: 'gradle/manifest.gradle'
+apply from: 'gradle/maven.gradle'

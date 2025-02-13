@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "com.craisinlord.integrated_minecraft.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "integrated_minecraft.refmap.json",
+  "mixins": [
+    "DisableStructuresMixin",
+    "EntityDreadMobMixin",
+    "ExtendedArmorMaterialsMixin",
+    "LivingEntityMixin",
+    "LocateStructuresCommandMixin",
+    "NoDragonRoostsInStructuresMixin",
+    "NoDragonsCavesInStructuresMixin",
+    "PlayerInventoryExtraStuffMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
